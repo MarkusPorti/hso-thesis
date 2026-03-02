@@ -1,0 +1,9 @@
+Muster2026:
+  type: article
+  title: Musterquelle
+  author:
+  - Mustermann, Max
+  date: 2026
+  url:
+    value: https://example.com
+    date: 2026-01-21

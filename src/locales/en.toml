@@ -1,0 +1,14 @@
+[meta]
+language-tag = "en"
+language-name = "English"
+
+[strings]
+title = "Title"
+author = "Author"
+date = "Date"
+abbreviations = "List of Abbreviations"
+bibliography = "Bibliography"
+declaration = "Declaration of Authorship"
+glossary = "Glossary"
+abbreviations-glossary = "List of Abbreviations and Glossary"
+table-of-contents = "Table of Contents"

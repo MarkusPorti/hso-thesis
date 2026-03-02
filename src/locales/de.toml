@@ -1,0 +1,33 @@
+[meta]
+language-tag = "de"
+language-name = "Deutsch"
+
+[strings]
+title = "Titel"
+author = "Autor"
+date = "Datum"
+location-date = "Ort, Datum"
+abstract = "Kurzfassung"
+appendix = "Anhang"
+bibliography = "Literaturverzeichnis"
+
+list-of-figures = "Abbildungsverzeichnis"
+list-of-tables = "Tabellenverzeichnis"
+list-of-listings = "Listingverzeichnis"
+
+nomenclature = "Nomenklatur"
+formular-symbols = "Formelzeichen"
+abbrevations = "Abkürzungen"
+glossary = "Glossar"
+
+declaration-title = "Eidesstattliche Erklärung"
+declaration-text-thesis = """
+Hiermit versichere ich eidesstattlich, dass die vorliegende #ctx.info.type von mir selbstständig und ohne unerlaubte fremde Hilfe angefertigt worden ist, insbesondere, dass ich alle Stellen, die wörtlich oder annähernd wörtlich oder dem Gedanken nach aus Veröffentlichungen, unveröffentlichten Unterlagen und Gesprächen entnommen worden sind, als solche an den entsprechenden Stellen innerhalb der Arbeit durch Zitate kenntlich gemacht habe, wobei in den Zitaten jeweils der Umfang der entnommenen Originalzitate kenntlich gemacht wurde. Die Arbeit lag in gleicher oder ähnlicher Fassung noch keiner Prüfungsbehörde vor und wurde bisher nicht veröffentlicht. Ich bin mir bewusst, dass eine falsche Versicherung rechtliche Folgen haben wird.
+"""
+
+copyright-title = "Urheberrechtserklärung"
+copyright-text = """Diese #ctx.info.type ist urheberrechtlich geschützt, unbeschadet dessen wird folgenden Rechtsübertragungen zugestimmt:
+- der Übertragung des Rechts zur Vervielfältigung der #ctx.info.type für Lehrzwecke an der Hochschule Offenburg (§ 16 UrhG),
+- der Übertragung des Vortrags-, Aufführungs- und Vorführungsrechts für Lehrzwecke durch Professoren der Hochschule Offenburg (§ 19 UrhG),
+- der Übertragung des Rechts auf Wiedergabe durch Bild- oder Tonträger an die Hochschule Offenburg (§ 21 UrhG).
+"""
