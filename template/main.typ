@@ -1,5 +1,8 @@
 #import "@local/hso-thesis:0.1.0": company, faculty, styles, supervisor, thesis, thesis-info, thesis-type
 
+// TODO Die folgende Seite muss nach dem Lesen entfernt werden
+#include "chapters/README.typ"
+
 // Definition der Metadaten
 #let info = thesis-info(
   lang: "de",
@@ -32,4 +35,7 @@
   appendix: include "appendix.typ"
 )
 
-#include "chapters/chapter1.typ"
+#include "chapters/01_introduction.typ"
+#include "chapters/02_main_chapter.typ"
+#include "chapters/03_more_chapters.typ"
+#include "chapters/04_summary.typ"

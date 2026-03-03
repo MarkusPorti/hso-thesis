@@ -106,7 +106,6 @@
 }
 
 #let render-body(ctx) = {
-  pagebreak(weak: true)
   set heading(numbering: "1.1")
   [#metadata(none) <main-matter-start>]
   ctx.body

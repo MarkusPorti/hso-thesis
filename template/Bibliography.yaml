@@ -7,3 +7,29 @@ Muster2026:
   url:
     value: https://example.com
     date: 2026-01-21
+
+Leitfaden-EMI:
+  type: web
+  title: Leitfaden zur Anfertigung wissenschaftlicher Arbeiten an der Fakultät EMI
+  author:
+  - Trahasch, Stefan
+  - Schmidt
+  - Nuß
+  - Pfletschinger
+  - Hoppe
+  - Dorer
+  - Otte
+  - Zirn
+  - Mackensen
+  date: 2022
+  url:
+    value: https://www.hs-offenburg.de/fileadmin/Einrichtungen/Fakultaet_EMI/files/Abschlussarbeit/Wissenschaftliches_Arbeiten_EMI_2022-08-11.pdf
+    date: 2026-03-03
+
+Leitfaden-W:
+  type: web
+  title: Leitfaden zur Anfertigung wissenschaftlicher Arbeiten an der Fakultät Wirtschaft
+  date: 2025
+  url:
+    value: https://bw.hs-offenburg.de/fileadmin/Einrichtungen/Fakultaet_B_W/Allgemein_files/Richtlinien_Abschlussarbeit/Leitfaden_Anfertigung_Wissenschaftlicher_Arbeiten_Fakult%C3%A4t_Wirtschaft_2025.pdf
+    date: 2026-03-03
