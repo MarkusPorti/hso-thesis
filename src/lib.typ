@@ -57,15 +57,6 @@
   )
 }
 
-#let study-period(from: datetime.today(), to: datetime.today()) = {
-  assert(type(from) == datetime, message: "period.from must be a datetime object")
-  assert(type(to) == datetime, message: "period.to must be a datetime object")
-  (
-    from: from,
-    to: to,
-  )
-}
-
 #let thesis-info(
   lang: "de",
   thesis-type: thesis-type.BACHELOR,
@@ -74,10 +65,11 @@
   faculty: faculty.EMI,
   author: "",
   degree: "",
-  period: study-period(),
+  period: [01.01.2026 -- 30.06.2026],
   supervisors: (),
   companies: (),
   location: "Musterstadt",
+  copyright: true,
   glossary: none,
   bibliography: "",
   bibliography-style: "../assets/ieee.csl",
@@ -86,13 +78,6 @@
   assert(type(author) == str and author != "", message: "Author must be a non-empty string")
   assert(type(supervisors) == array, message: "Supervisors must be an array of supervisor() objects")
   assert(type(companies) == array, message: "Companies must be an array of company() objects")
-
-  if period != none {
-    assert(
-      type(period) == dictionary and "from" in period and "to" in period,
-      message: "Period must be created using study-period()",
-    )
-  }
 
   (
     lang: lang,
@@ -106,6 +91,7 @@
     supervisors: supervisors,
     companies: companies,
     location: location,
+    copyright: copyright,
     glossary: glossary,
     bibliography: bibliography,
     bibliography-style: bibliography-style,
@@ -116,8 +102,6 @@
 
 
 #let abstract(ctx) = {
-  pagebreak(weak: true)
-  heading(outlined: false, bookmarked: true)[#ctx.strings.at("abstract")]
   ctx.abstract
 }
 
@@ -158,17 +142,19 @@
 }
 
 #let appendix(ctx) = {
-  pagebreak()
-  [= #ctx.strings.at("appendix") <appendix>]
-  set heading(numbering: (..nums) => {
-    let vals = nums.pos()
-    if vals.len() == 2 {
-      return numbering("A", vals.last())
-    } else if vals.len() > 2 {
-      return numbering("A.1", ..vals.slice(1))
-    }
-  })
-  ctx.appendix
+  if ctx.appendix != none {
+    pagebreak()
+    [= #ctx.strings.at("appendix") <appendix>]
+    set heading(numbering: (..nums) => {
+      let vals = nums.pos()
+      if vals.len() == 2 {
+        return numbering("A", vals.last())
+      } else if vals.len() > 2 {
+        return numbering("A.1", ..vals.slice(1))
+      }
+    })
+    ctx.appendix
+  }
 }
 
 #let components = (
@@ -189,8 +175,8 @@
 #let thesis(
   info: (:),
   style: none,
-  abstract: [],
-  appendix: [],
+  abstract: none,
+  appendix: none,
   body,
 ) = {
   // Initialize the style dictionary

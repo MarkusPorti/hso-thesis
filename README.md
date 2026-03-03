@@ -13,7 +13,7 @@ Das Template bietet vordefinierte Stile für folgende Fakultäten:
 
 Um dieses Package lokal zu nutzen, kopieren Sie den Inhalt dieses Verzeichnisses in den lokalen Typst-Package-Ordner:
 
-- **Windows:** `%APPDATA%\typst\packages\local\hso-thesis\0.1.0\`
+- **Windows:** `%LOCALAPPDATA%\typst\packages\local\hso-thesis\0.1.0\`
 - **macOS:** `~/Library/Application Support/typst/packages/local/hso-thesis/0.1.0/`
 - **Linux:** `~/.local/share/typst/packages/local/hso-thesis/0.1.0/`
 
@@ -41,10 +41,7 @@ Sie können die Funktionen des Packages auch in einem bestehenden Projekt nutzen
   author: "Max Mustermann",
   degree: "Informatik",
   faculty: faculty.EMI,
-  period: study-period(
-    from: datetime(year: 2026, month: 1, day: 1),
-    to: datetime(year: 2026, month: 5, day: 28)
-  ),
+  period: [01.01.2026 -- 30.06.2026],
   supervisors: (
     supervisor(name: "Prof. Dr. Max Mustermann", institution: "HS Offenburg", gender: "m"),
     supervisor(name: "Maxi Musterfrau", institution: "Musterfirma", gender: "f"),
@@ -81,10 +78,11 @@ Zentrales Objekt für alle Metadaten der Arbeit.
 - `title`, `subtitle`: Titel und Untertitel
 - `author`: Name des Autors
 - `degree`: Studiengang
-- `period`: Erstellt mit `study-period()`
+- `period`: Bearbeitungszeitraum
 - `supervisors`: Array von `supervisor()` Objekten
 - `companies`: Array von `company()` Objekten
 - `location`: Ort der Unterschrift für die eidesstattliche Erklärung
+- `copyright`: Übertragung der Rechte zu Verwendung der Arbeit zu Lehrzwecken an die Hochschule Offenburg. `true` oder `false`
 - `glossary`: Geladene YAML-Daten für das Glossar
 - `bibliography`: Inhalt der Literaturdatei (als String/Bytes)
 - `bibliography-style`: Inhalt der CSL-Datei (als String/Bytes)
@@ -92,7 +90,6 @@ Zentrales Objekt für alle Metadaten der Arbeit.
 ### Hilfsfunktionen
 - `supervisor(name, institution, gender)`: Erstellt einen Betreuer. `gender` ist "m" oder "f".
 - `company(name, logo)`: Erstellt ein Unternehmen. `logo` ist optional ein `image()`.
-- `study-period(from, to)`: Erstellt einen Zeitraum aus zwei `datetime` Objekten.
 
 ### `thesis` (Hauptfunktion)
 - `info`: Das `thesis-info` Objekt.

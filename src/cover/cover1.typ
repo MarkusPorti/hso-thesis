@@ -66,8 +66,7 @@
         row-gutter: 10pt,
         [#ctx.strings.author:], info.author,
         [#ctx.strings.degree:], info.degree,
-        [#ctx.strings.period:],
-        [#info.period.from.display("[day].[month].[year]") -- #info.period.to.display("[day].[month].[year]")],
+        [#ctx.strings.period:], info.period,
         ..for s in info.supervisors {
           (s.display)(ctx)
         },

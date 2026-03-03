@@ -26,9 +26,12 @@
     [#ctx.info.author],
   )
 
-  v(4cm)
+  if ctx.info.copyright {
+    v(1fr)
 
-  heading(outlined: false, bookmarked: true)[#ctx.strings.at("copyright-title")]
-  
-  eval(ctx.strings.at("copyright-text"), mode: "markup", scope: (ctx: ctx))
+    heading(outlined: false, bookmarked: true)[#ctx.strings.at("copyright-title")]
+
+    eval(ctx.strings.at("copyright-text"), mode: "markup", scope: (ctx: ctx))
+  }
+  pagebreak(weak: true)
 }
