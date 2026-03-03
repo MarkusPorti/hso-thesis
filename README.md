@@ -1,6 +1,13 @@
-# Typst Thesis Template - Hochschule Offenburg (EMI)
+# Typst Thesis Template - Hochschule Offenburg
 
-Dies ist ein Typst-Package für Bachelor- und Masterthesen an der Fakultät EMI der Hochschule Offenburg. Es folgt dem offiziellen Leitfaden für wissenschaftliches Arbeiten.
+Dies ist ein Typst-Package für Bachelor-, Masterthesen und Seminararbeiten an der Hochschule Offenburg. Es unterstützt verschiedene Fakultäten und folgt dem offiziellen Leitfaden für wissenschaftliches Arbeiten.
+
+## Unterstützte Fakultäten
+
+Das Template bietet vordefinierte Stile für folgende Fakultäten:
+- **EMI:** Elektrotechnik, Medizintechnik und Informatik
+- **MV:** Maschinenbau & Verfahrenstechnik
+- **W:** Wirtschaft
 
 ## Installation (Lokal)
 
@@ -23,32 +30,73 @@ typst init @local/hso-thesis:0.1.0
 Sie können die Funktionen des Packages auch in einem bestehenden Projekt nutzen:
 
 ```typst
-#import "@local/hso-thesis:0.1.0": *
+#import "@local/hso-thesis:0.1.0": thesis, thesis-info, supervisor, company, study-period, faculty, thesis-type, styles
 
-#show: project.with(
-  title: "Titel der Thesis",
-  author: "Dein Name",
-  // ... weitere Parameter
+// Definition der Metadaten
+#let info = thesis-info(
+  lang: "de",
+  thesis-type: thesis-type.BACHELOR,
+  title: "Haupttitel der Thesis",
+  subtitle: "Untertitel",
+  author: "Max Mustermann",
+  degree: "Informatik",
+  faculty: faculty.EMI,
+  period: study-period(
+    from: datetime(year: 2026, month: 1, day: 1),
+    to: datetime(year: 2026, month: 5, day: 28)
+  ),
+  supervisors: (
+    supervisor(name: "Prof. Dr. Max Mustermann", institution: "HS Offenburg", gender: "m"),
+    supervisor(name: "Maxi Musterfrau", institution: "Musterfirma", gender: "f"),
+  ),
+  companies: (
+    company(name: "Musterfirma GmbH"),
+  ),
+  location: "Offenburg",
+  glossary: yaml("glossary.yaml"),
+  bibliography: read("bibliography.bib"),
+  bibliography-style: read("ieee.csl"),
 )
 
-= Einleitung
-...
+// Hauptfunktion der Vorlage
+#show: thesis.with(
+  info: info,
+  style: styles.emi, // oder styles.mv, styles.w
+  abstract: include "abstract.typ",
+  appendix: include "appendix.typ"
+)
+
+#include "chapters/chapter1.typ"
 ```
 
-## Parameter der `project` Funktion
+## Parameter und Hilfsfunktionen
 
-Die `project` Funktion unterstützt folgende Parameter:
+Das Template nutzt strukturierte Datenobjekte für die Konfiguration:
 
-- `title`: Titel der Arbeit
-- `subtitle`: Untertitel (optional)
+### `thesis-info`
+Zentrales Objekt für alle Metadaten der Arbeit.
+- `lang`: "de" oder "en"
+- `thesis-type`: `thesis-type.BACHELOR`, `MASTER` oder `SEMINAR`
+- `faculty`: `faculty.EMI`, `MV` oder `W`
+- `title`, `subtitle`: Titel und Untertitel
 - `author`: Name des Autors
 - `degree`: Studiengang
-- `period`: Bearbeitungszeitraum
-- `supervisors`: Dictionary mit `company` und `university` Betreuern
-- `companies`: Dictionary mit Firmennamen (`c1`, `c2`)
-- `logo_hs`: Pfad zum HS-Offenburg Logo
-- `logo_company1`, `logo_company2`: Pfade zu Firmenlogos (optional)
-- `glossary_data`: Geladene YAML-Daten für das Glossar (z.B. `yaml("glossary.yaml")`)
-- `bibliography_file`: Pfad zur Literaturdatei
-- `bibliography_style`: Zitationsstil (Standard: `"ieee"`)
-- `appendix`: Inhalt des Anhangs (z.B. `include "appendix.typ"`)
+- `period`: Erstellt mit `study-period()`
+- `supervisors`: Array von `supervisor()` Objekten
+- `companies`: Array von `company()` Objekten
+- `location`: Ort der Unterschrift für die eidesstattliche Erklärung
+- `glossary`: Geladene YAML-Daten für das Glossar
+- `bibliography`: Inhalt der Literaturdatei (als String/Bytes)
+- `bibliography-style`: Inhalt der CSL-Datei (als String/Bytes)
+
+### Hilfsfunktionen
+- `supervisor(name, institution, gender)`: Erstellt einen Betreuer. `gender` ist "m" oder "f".
+- `company(name, logo)`: Erstellt ein Unternehmen. `logo` ist optional ein `image()`.
+- `study-period(from, to)`: Erstellt einen Zeitraum aus zwei `datetime` Objekten.
+
+### `thesis` (Hauptfunktion)
+- `info`: Das `thesis-info` Objekt.
+- `style`: Der gewünschte Fakultäts-Stil (`styles.emi`, `styles.mv`, `styles.w`).
+- `abstract`: Inhalt für die Kurzfassung (optional).
+- `appendix`: Inhalt für den Anhang (optional).
+- `body`: Der eigentliche Inhalt der Arbeit.

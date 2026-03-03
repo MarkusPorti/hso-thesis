@@ -1,7 +1,4 @@
-#import "@local/hso-thesis:0.1.0": thesis, thesis-info, supervisor, company, study-period, faculty, thesis-type, translations, styles
-
-#let lang = "de"
-#let translations = translations(lang)
+#import "@local/hso-thesis:0.1.0": company, faculty, study-period, styles, supervisor, thesis, thesis-info, thesis-type
 
 // Definition der Metadaten
 #let info = thesis-info(
@@ -14,10 +11,10 @@
   faculty: faculty.EMI,
   period: study-period(
     from: datetime(year: 2026, month: 1, day: 1),
-    to: datetime(year: 2026, month: 5, day: 28)
+    to: datetime(year: 2026, month: 5, day: 28),
   ),
   supervisors: (
-    supervisor(name: "Prof. Dr. Betreuer", institution: "Musterhochschule"),
+    supervisor(name: "Prof. Dr. Max Mustermann", institution: "Hochschule Offenburg", gender: "m"),
     supervisor(name: "Maxi Musterfrau", institution: "Musterfirma"),
   ),
   companies: (
@@ -33,7 +30,8 @@
 #show: thesis.with(
   info: info,
   style: styles.emi,
-  translations: translations,
+  abstract: include "abstract.typ",
+  appendix: include "appendix.typ"
 )
 
 #include "chapters/chapter1.typ"

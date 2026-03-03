@@ -1,5 +1,5 @@
 #import "../utils.typ": thesis-page-numbering
-#import "../cover/cover2.typ": cover2
+#import "../cover/cover1.typ": cover
 
 #let setup(ctx, body) = {
   set document(author: ctx.info.author, title: ctx.info.title)
@@ -8,9 +8,14 @@
     number-align: center,
     numbering: thesis-page-numbering,
   )
-  set text(font: ctx.style.font, size: ctx.style.fontsize, lang: "de")
+  set text(font: ctx.style.font, size: ctx.style.fontsize, lang: ctx.info.lang)
   set heading(numbering: "1.1")
   
+  body
+}
+
+#let style-content(ctx, body) = {
+  set par(leading: 1em, spacing: 1.5em, justify: true, first-line-indent: 0pt)
   body
 }
 
@@ -19,13 +24,18 @@
   font: "Times New Roman",
   fontsize: 12pt,
   setup: setup,
+  cover: cover,
+  style-content: style-content,
   chapters: (
-    cover2,
-    components.toc,
-    components.abbreviations,
-    components.glossary,
-    components.body,
     components.declaration,
+    components.abstract,
+    components.toc,
+    components.nomenclature,
+    components.body,
     components.bibliography,
+    components.figures,
+    components.tables,
+    components.listings,
+    components.appendix,
   ),
 )

@@ -15,13 +15,12 @@
       if target-heading != none {
         if target-heading.numbering != none and target-heading.numbering not in ("A.", "I.") {
           let num = counter(heading).at(target-heading.location())
-          let prefix = "Kapitel"
 
           block(width: 100%, stroke: (bottom: 0.5pt + luma(50%)), inset: (bottom: 5pt))[
             #grid(
               columns: (1fr, 1fr),
               align: (left, right),
-              [#prefix #numbering(target-heading.numbering, ..num)], [#target-heading.body],
+              [#ctx.strings.chapter #numbering(target-heading.numbering, ..num)], [#target-heading.body],
             )
           ]
         }
@@ -58,12 +57,12 @@
   show ref: it => {
     let el = it.element
     if el != none and el.func() == heading {
-      if el.level == 1 and el.body == [Anhang] {
-        link(el.location(), [Anhang])
+      if el.level == 1 and el.body == [#ctx.strings.appendix] {
+        link(el.location(), [#ctx.strings.appendix])
       } else if el.level == 1 {
-        link(el.location(), [Kapitel #numbering(el.numbering, ..counter(heading).at(el.location()))])
+        link(el.location(), [#ctx.strings.chapter #numbering(el.numbering, ..counter(heading).at(el.location()))])
       } else {
-        link(el.location(), [Abschnitt #numbering(el.numbering, ..counter(heading).at(el.location()))])
+        link(el.location(), [#ctx.strings.section #numbering(el.numbering, ..counter(heading).at(el.location()))])
       }
     } else {
       it

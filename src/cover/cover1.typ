@@ -1,7 +1,7 @@
 // Cover-Page for Thesis with Companies
 #let cover(ctx) = {
   let info = ctx.info
-  
+
   page(numbering: none, margin: (left: 30mm, top: 25mm, right: 25mm, bottom: 25mm))[
 
     // Logo Hochschule
@@ -9,8 +9,8 @@
     #v(0.5cm)
 
     #align(center)[
-      #text(size: 14pt)[Fakultät #info.faculty \
-        an der Hochschule für Technik, Wirtschaft und Medien Offenburg]
+      #text(size: 14pt)[#ctx.strings.faculty #info.faculty \
+        #ctx.strings.university]
 
       #v(1.5cm)
 
@@ -30,16 +30,16 @@
       #v(1cm)
 
       #if info.companies.len() > 0 {
-        [Durchgeführt in Zusammenarbeit mit\ ]
+        [#ctx.strings.collaboration\ ]
         v(0.1cm)
-        let company_names = info.companies.map(c => c.name).join(" und ")
+        let company_names = info.companies.map(c => c.name).join(" " + ctx.strings.and + " ")
         text(size: 13pt)[#company_names]
         v(0.5cm)
 
         // Firmenlogos nebeneinander
         let logos = info.companies.filter(c => c.logo != none).map(c => image(c.logo, height: 1.2cm))
         if logos.len() > 0 {
-           grid(
+          grid(
             columns: (1fr, auto, 1fr),
             align: center + horizon,
             [],
@@ -54,7 +54,7 @@
       }
     ]
 
-    #v(1fr)
+    #v(2fr)
 
     // Tabelle für Autor & Betreuer
     #align(center)[
@@ -64,12 +64,13 @@
         gutter: 15pt,
         align: (left, left),
         row-gutter: 10pt,
-        "Autor:", info.author,
-        "Studiengang:", info.degree,
-        "Bearbeitungszeitraum:", [#info.period.from.display("[day].[month].[year]") -- #info.period.to.display("[day].[month].[year]")],
+        [#ctx.strings.author:], info.author,
+        [#ctx.strings.degree:], info.degree,
+        [#ctx.strings.period:],
+        [#info.period.from.display("[day].[month].[year]") -- #info.period.to.display("[day].[month].[year]")],
         ..for s in info.supervisors {
-          ("Betreuer " + s.institution + ":", s.name)
-        }
+          (s.display)(ctx)
+        },
       )
     ]
 

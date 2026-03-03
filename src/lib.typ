@@ -2,15 +2,16 @@
 #import "declaration.typ": declaration
 #import "bibliography.typ": bibliography
 #import "styles/emi.typ": style as emi-style
-// #import "styles/mv.typ": style as mv-style
-// #import "styles/w.typ": style as w-style
+#import "styles/mv.typ": style as mv-style
+#import "styles/w.typ": style as w-style
 #import "locales.typ": translations
+#import "utils.typ": thesis-page-numbering
 
 // Re-export styles for convenience
 #let styles = (
   emi: emi-style,
-  // mv: mv-style,
-  // w: w-style,
+  mv: mv-style,
+  w: w-style,
 )
 
 // --- Enums & Constants ---
@@ -29,12 +30,21 @@
 
 // --- Data Objects & Types ---
 
-#let supervisor(name: "", institution: "") = {
+#let supervisor(name: "", institution: "", gender: "f") = {
   assert(type(name) == str, message: "Supervisor name must be a string")
+  assert(gender in ("m", "f"), message: "Gender must be 'm' or 'f'")
   (
     __type: "supervisor",
     name: name,
     institution: institution,
+    gender: gender,
+    display: ctx => {
+      let supervisor-label = if gender == "f" { ctx.strings.supervisor-f } else { ctx.strings.supervisor-m }
+      (
+        [#supervisor-label #institution:],
+        name,
+      )
+    },
   )
 }
 
@@ -101,8 +111,6 @@
     bibliography-style: bibliography-style,
   )
 }
-
-#import "utils.typ": thesis-page-numbering
 
 // --- Standard Components ---
 
@@ -181,7 +189,6 @@
 #let thesis(
   info: (:),
   style: none,
-  translations: (:),
   abstract: [],
   appendix: [],
   body,
@@ -192,7 +199,7 @@
   let ctx = (
     info: info,
     style: style-dict,
-    strings: translations.strings,
+    strings: translations(info.lang).strings,
     abstract: abstract,
     appendix: appendix,
     body: body,

@@ -5,11 +5,20 @@ language-name = "Deutsch"
 [strings]
 title = "Titel"
 author = "Autor"
+degree = "Studiengang"
+period = "Bearbeitungszeitraum"
+supervisor-m = "Betreuer"
+supervisor-f = "Betreuerin"
 date = "Datum"
 location-date = "Ort, Datum"
 abstract = "Kurzfassung"
 appendix = "Anhang"
 bibliography = "Literaturverzeichnis"
+
+faculty = "Fakultät"
+university = "an der Hochschule für Technik, Wirtschaft und Medien Offenburg"
+collaboration = "Durchgeführt in Zusammenarbeit mit"
+and = "und"
 
 list-of-figures = "Abbildungsverzeichnis"
 list-of-tables = "Tabellenverzeichnis"
@@ -31,3 +40,6 @@ copyright-text = """Diese #ctx.info.type ist urheberrechtlich geschützt, unbesc
 - der Übertragung des Vortrags-, Aufführungs- und Vorführungsrechts für Lehrzwecke durch Professoren der Hochschule Offenburg (§ 19 UrhG),
 - der Übertragung des Rechts auf Wiedergabe durch Bild- oder Tonträger an die Hochschule Offenburg (§ 21 UrhG).
 """
+
+chapter = "Kapitel"
+section = "Abschnitt"
