@@ -1,6 +1,9 @@
 #import "../utils.typ": thesis-page-numbering
 #import "../cover/cover1.typ": cover
+#import "../header.typ": header-current-chapter
 
+// Setup the document with styles for all pages.
+// This is applied before the cover-page.
 #let setup(ctx, body) = {
   set document(author: ctx.info.author, title: ctx.info.title)
 
@@ -8,24 +11,7 @@
     margin: (left: 30mm, top: 25mm, right: 25mm, bottom: 25mm),
     number-align: center,
     numbering: thesis-page-numbering,
-    header: context {
-      let all-headings = query(heading.where(level: 1))
-      let target-heading = all-headings.filter(h => h.location().page() <= here().page()).last(default: none)
-
-      if target-heading != none {
-        if target-heading.numbering != none and target-heading.numbering not in ("A.", "I.") {
-          let num = counter(heading).at(target-heading.location())
-
-          block(width: 100%, stroke: (bottom: 0.5pt + luma(50%)), inset: (bottom: 5pt))[
-            #grid(
-              columns: (1fr, 1fr),
-              align: (left, right),
-              [#ctx.strings.chapter #numbering(target-heading.numbering, ..num)], [#target-heading.body],
-            )
-          ]
-        }
-      }
-    },
+    header: if ctx.style.header != none {(ctx.style.header)(ctx)},
   )
 
   set text(font: ctx.style.font, size: ctx.style.fontsize, lang: ctx.info.lang)
@@ -33,6 +19,8 @@
   body
 }
 
+// Setup the style for the actual content.
+// This is executed directly after the cover-page and applies to all following content.
 #let style-content(ctx, body) = {
   set par(leading: 1em, spacing: 1.5em, justify: true, first-line-indent: 0pt)
   set terms(hanging-indent: 1.5em)
@@ -72,10 +60,12 @@
   body
 }
 
+// Collect all style definitions in one dictionary to use in the template.
 #let style(components: (:)) = (
   font: "Arial",
   fontsize: 12pt,
   setup: setup,
+  header: header-current-chapter,
   cover: cover,
   style-content: style-content,
   chapters: (
