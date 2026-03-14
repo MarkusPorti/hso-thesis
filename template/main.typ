@@ -22,6 +22,7 @@
   ),
   location: "Offenburg", // Wird bei der Unterschrift der Eidesstattlichen Erklärung verwendet
   copyright: true,
+  ai-usage: 1, // 1: Erlaubte Nutzung (Liste im Anhang erforderlich), 2: Kennzeichnung im Text, 3: Verbot der Nutzung, none: Deaktiviert
   glossary: yaml("glossary.yaml"),
   bibliography: read("Bibliography.yaml", encoding: none),
   bibliography-style: read("ieee.csl", encoding: none),

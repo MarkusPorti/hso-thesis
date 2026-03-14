@@ -1,7 +1,7 @@
 #import "components/glossary.typ": nomenclature
 #import "components/declaration.typ": declaration
 #import "components/bibliography.typ": bibliography
-#import "components/default.typ": (
+#import "components/base.typ": (
   abstract, appendix, list-of-figures, list-of-listings, list-of-tables, render-body, table-of-contents,
 )
 #import "styles/emi.typ": style as emi-style
@@ -72,6 +72,7 @@
   supervisors: (),
   companies: (),
   location: "Musterstadt",
+  ai-usage: none,
   copyright: true,
   glossary: none,
   bibliography: "",
@@ -81,6 +82,7 @@
   assert(type(author) == str and author != "", message: "Author must be a non-empty string")
   assert(type(supervisors) == array, message: "Supervisors must be an array of supervisor() objects")
   assert(type(companies) == array, message: "Companies must be an array of company() objects")
+  assert(ai-usage in (none, 1, 2, 3), message: "ai-usage must be one of none, 1, 2, or 3")
 
   (
     lang: lang,
@@ -95,6 +97,7 @@
     companies: companies,
     location: location,
     copyright: copyright,
+    ai-usage: ai-usage,
     glossary: glossary,
     bibliography: bibliography,
     bibliography-style: bibliography-style,

@@ -1,4 +1,4 @@
-// Collection of smaller components to use in the thesis like Abstract, ToC, etc.
+// Collection of base components to use in the thesis like Abstract, ToC, etc.
 
 #let abstract(ctx) = {
   ctx.abstract
