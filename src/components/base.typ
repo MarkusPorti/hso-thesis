@@ -22,6 +22,7 @@
   }
 
   outline(depth: 3, indent: 2em)
+  pagebreak(weak: true)
 }
 
 #let list-of-figures(ctx) = {

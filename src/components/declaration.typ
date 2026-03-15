@@ -8,7 +8,6 @@
 
   // KI-Erklärung falls konfiguriert
   if ctx.info.ai-usage != none {
-    v(1cm)
     heading(outlined: false, bookmarked: true, depth: 2)[#ctx.strings.at("ai-declaration-title")]
 
     let ai-text-key = "ai-declaration-text-" + str(ctx.info.ai-usage)
@@ -17,15 +16,13 @@
 
   // Urheberrechtserklärung (Nutzung der Arbeit zu Lehrzwecken)
   if ctx.info.copyright {
-    v(1cm)
-
     heading(outlined: false, bookmarked: true, depth: 2)[#ctx.strings.at("copyright-title")]
 
     eval(ctx.strings.at("copyright-text"), mode: "markup", scope: (ctx: ctx))
   }
 
   // Feld für Unterschrift
-  v(1.5cm, weak: true)
+  v(1cm, weak: true)
   block(breakable: false)[
     #grid(
       columns: (6cm, 1fr),
